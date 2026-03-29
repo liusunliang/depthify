@@ -71,6 +71,14 @@
       display: block;
       margin-top: 10px;
     }
+
+    .lang-panel {
+      display: none;
+    }
+
+    .lang-panel.is-visible {
+      display: block;
+    }
     @media (max-width: 640px) {
       .wrap { padding: 20px 14px 40px; }
       .hero, .card { border-radius: 20px; padding: 22px 18px; }
@@ -85,7 +93,7 @@
       <p>If you need help with Depthify, have questions about purchases, or want to report a bug or provide feedback, please contact us using the information below.</p>
     </section>
 
-    <section class="card">
+    <section class="card lang-panel is-visible" data-lang-panel="en">
       <div class="tag">English</div>
       <h2>Support</h2>
       <p>For support, bug reports, purchase issues, privacy questions, or feature suggestions, contact:</p>
@@ -106,7 +114,7 @@
       </div>
     </section>
 
-    <section class="card" id="zh-Hans">
+    <section class="card lang-panel" id="zh-Hans" data-lang-panel="zh-Hans">
       <div class="tag">简体中文</div>
       <h2>支持与反馈</h2>
       <p>如果你在使用 Depthify 时需要帮助，遇到购买问题、想反馈 Bug，或提出功能建议，请通过以下方式联系：</p>
@@ -127,5 +135,13 @@
       </div>
     </section>
   </main>
+  <script>
+    (function () {
+      var active = window.location.hash === '#zh-Hans' ? 'zh-Hans' : 'en';
+      document.querySelectorAll('[data-lang-panel]').forEach(function (panel) {
+        panel.classList.toggle('is-visible', panel.getAttribute('data-lang-panel') === active);
+      });
+    })();
+  </script>
 </body>
 </html>

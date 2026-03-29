@@ -117,6 +117,14 @@
       margin-top: 18px;
     }
 
+    .lang-panel {
+      display: none;
+    }
+
+    .lang-panel.is-visible {
+      display: block;
+    }
+
     @media (max-width: 640px) {
       .wrap { padding: 20px 14px 40px; }
       .hero, .card { border-radius: 20px; padding: 22px 18px; }
@@ -133,7 +141,7 @@
       <div class="meta">最后更新：2026年3月29日</div>
     </section>
 
-    <section class="card">
+    <section class="card lang-panel is-visible" data-lang-panel="en">
       <div class="lang-tag">English</div>
       <h2>Privacy Policy</h2>
       <p>Depthify primarily imports, manages, and presents images that you choose on your device, including 2D viewing, spatial scene viewing, favorites, export, and purchase-unlock features. In the current version, we do not upload your selected images or their metadata to developer-operated servers, except for Apple-provided system services involved in purchases and system pickers.</p>
@@ -193,7 +201,7 @@
       </ul>
     </section>
 
-    <section class="card" id="zh-Hans">
+    <section class="card lang-panel" id="zh-Hans" data-lang-panel="zh-Hans">
       <div class="lang-tag">简体中文</div>
       <h2>隐私政策</h2>
       <p>Depthify 主要在设备本地导入、管理和展示你选择的图片，包括 2D 预览、空间场景查看、收藏、导出和购买解锁功能。除 Apple 提供的系统服务外，当前版本不会将你选择的图片或其元数据上传到开发者自有服务器。</p>
@@ -257,6 +265,13 @@
       <p class="footnote">此页面可作为 Depthify 在 App 内和 App Store Connect 中统一使用的公开隐私政策链接。</p>
     </section>
   </main>
+  <script>
+    (function () {
+      var active = window.location.hash === '#zh-Hans' ? 'zh-Hans' : 'en';
+      document.querySelectorAll('[data-lang-panel]').forEach(function (panel) {
+        panel.classList.toggle('is-visible', panel.getAttribute('data-lang-panel') === active);
+      });
+    })();
+  </script>
 </body>
-</html>
 </html>
