@@ -30,6 +30,14 @@
       padding: 32px 28px;
       box-shadow: 0 18px 50px rgba(35, 124, 255, 0.18);
     }
+
+    .hero-en {
+      display: block;
+    }
+
+    .hero-zh {
+      display: none;
+    }
     .hero h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 42px); line-height: 1.1; }
     .hero p { margin: 8px 0 0; max-width: 720px; opacity: 0.96; }
     .meta { margin-top: 14px; font-size: 14px; opacity: 0.9; }
@@ -66,11 +74,27 @@
       margin-top: 14px;
     }
 
-    .lang-panel {
+    .lang-panel-en {
+      display: block;
+    }
+
+    .lang-panel-zh {
       display: none;
     }
 
-    .lang-panel.is-visible {
+    #zh-Hans:target ~ .lang-panel-en {
+      display: none;
+    }
+
+    #zh-Hans:target ~ .lang-panel-zh {
+      display: block;
+    }
+
+    #zh-Hans:target ~ .hero-en {
+      display: none;
+    }
+
+    #zh-Hans:target ~ .hero-zh {
       display: block;
     }
     @media (max-width: 640px) {
@@ -82,14 +106,21 @@
 </head>
 <body>
   <main class="wrap">
-    <section class="hero">
+    <div id="zh-Hans"></div>
+
+    <section class="hero hero-en">
       <h1>Depthify Terms of Use</h1>
       <p>This page provides the Terms of Use information for Depthify, including the standard end-user license terms and subscription-related terms.</p>
       <div class="meta">Last updated: March 29, 2026</div>
+    </section>
+
+    <section class="hero hero-zh">
+      <h1>Depthify 使用条款</h1>
+      <p>此页面提供 Depthify 的使用条款信息，包括标准最终用户许可条款与订阅相关条款。</p>
       <div class="meta">最后更新：2026年3月29日</div>
     </section>
 
-    <section class="card lang-panel is-visible" data-lang-panel="en">
+    <section class="card lang-panel-en">
       <div class="tag">English</div>
       <h2>Terms of Use</h2>
       <p>Depthify is licensed, not sold, to you. Unless a separate custom license agreement is provided, your use of Depthify is subject to Apple's Standard Licensed Application End User License Agreement.</p>
@@ -124,7 +155,7 @@
       <p>For support or legal questions regarding these Terms of Use, contact: <a href="mailto:sunliang.lsl@gmail.com">sunliang.lsl@gmail.com</a></p>
     </section>
 
-    <section class="card lang-panel" id="zh-Hans" data-lang-panel="zh-Hans">
+    <section class="card lang-panel-zh">
       <div class="tag">简体中文</div>
       <h2>使用条款</h2>
       <p>Depthify 以许可方式而非出售方式提供给你使用。除非另行提供自定义许可协议，否则你对 Depthify 的使用受 Apple 标准最终用户许可协议约束。</p>
@@ -153,19 +184,11 @@
 
       <h3>隐私</h3>
       <p>你对本 App 的使用也受 Depthify 隐私政策约束：</p>
-      <p><a href="privacy-policy.html">查看隐私政策</a></p>
+      <p><a href="privacy-policy.html#zh-Hans">查看隐私政策</a></p>
 
       <h3>联系</h3>
       <p>如对本使用条款有支持或法律相关问题，请联系：<a href="mailto:sunliang.lsl@gmail.com">sunliang.lsl@gmail.com</a></p>
     </section>
   </main>
-  <script>
-    (function () {
-      var active = window.location.hash === '#zh-Hans' ? 'zh-Hans' : 'en';
-      document.querySelectorAll('[data-lang-panel]').forEach(function (panel) {
-        panel.classList.toggle('is-visible', panel.getAttribute('data-lang-panel') === active);
-      });
-    })();
-  </script>
 </body>
 </html>
